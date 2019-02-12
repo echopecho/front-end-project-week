@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NoteList from './components/NoteList';
 
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 
 class App extends Component {
@@ -26,7 +27,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NoteList notes={this.state.notes} />
+        <Route path="/"
+          render={props => (
+            <NoteList notes={this.state.notes} />
+          )}
+        />
       </div>
     );
   }

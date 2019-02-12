@@ -31,6 +31,7 @@ export class Note extends Component {
       <div>
         <h2>{this.state.note.title}</h2>
         <p>{this.state.note.textBody}</p>
+        <button onClick={() => this.props.deleteNote(this.state.note._id)}>Delete</button>
       </div>
     )
   }

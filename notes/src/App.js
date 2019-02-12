@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NoteList from './components/NoteList';
+import NoteForm from './components/NoteForm';
 import Note from './components/Note';
 
 import { Route } from 'react-router-dom';
@@ -15,6 +16,30 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    this.fetchNotes();
+  }
+
+  addNote = note => {
+    axios.post('https://fe-notes.herokuapp.com/note/create', note)
+      .then(() => {
+        this.fetchNotes();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  deleteNote = id => {
+    axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  
+  fetchNotes = () => {
     axios.get('https://fe-notes.herokuapp.com/note/get/all')
       .then(response => {
         this.setState({ notes: response.data })
@@ -23,7 +48,6 @@ class App extends Component {
         console.log(err);
       })
   }
-  
 
   render() {
     return (
@@ -35,7 +59,21 @@ class App extends Component {
         />
         <Route 
           path="/notes/:id"
-          component={Note}
+          render={props => (
+            <Note 
+              deleteNote={this.deleteNote}
+              match={props.match}
+            />
+          )}
+        />
+        <Route
+          path="/add"
+          render={props => (
+            <NoteForm 
+              addNote={this.addNote}
+              history={props.history}
+            />
+          )} 
         />
       </div>
     );

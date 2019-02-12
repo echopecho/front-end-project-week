@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NoteList from './components/NoteList';
 import NoteForm from './components/NoteForm';
+import NoteNav from './components/NoteNav';
 import Note from './components/Note';
 
 import { Route } from 'react-router-dom';
@@ -32,7 +33,7 @@ class App extends Component {
   deleteNote = id => {
     axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
       .then(response => {
-        console.log(response);
+        this.fetchNotes();
       })
       .catch(err => {
         console.log(err);
@@ -52,6 +53,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Route path="/" component={NoteNav} />
         <Route exact path="/"
           render={props => (
             <NoteList notes={this.state.notes} />
@@ -62,7 +64,7 @@ class App extends Component {
           render={props => (
             <Note 
               deleteNote={this.deleteNote}
-              match={props.match}
+              {...props}
             />
           )}
         />

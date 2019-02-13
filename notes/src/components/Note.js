@@ -20,6 +20,11 @@ export class Note extends Component {
         console.log(err);
       })
   }
+
+  deleteNote = () => {
+    this.props.deleteNote(this.state.note._id);
+    this.props.history.push('/');
+  }
   
   render() {
     if(!this.state.note) {
@@ -31,7 +36,7 @@ export class Note extends Component {
       <div>
         <h2>{this.state.note.title}</h2>
         <p>{this.state.note.textBody}</p>
-        <button onClick={() => this.props.deleteNote(this.state.note._id)}>Delete</button>
+        <button onClick={this.deleteNote}>Delete</button>
       </div>
     )
   }

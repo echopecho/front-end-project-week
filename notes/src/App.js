@@ -32,6 +32,9 @@ class App extends Component {
 
   updateNote = (note, id) => {
     axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
+      .then(() => {
+        this.fetchNotes();
+      })
       .catch(err => {
         console.log(err);
       })
@@ -39,7 +42,7 @@ class App extends Component {
 
   deleteNote = id => {
     axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
-      .then(response => {
+      .then(() => {
         this.fetchNotes();
       })
       .catch(err => {
@@ -62,7 +65,7 @@ class App extends Component {
       <div className="App">
         <Route path="/" component={NoteNav} />
         <Route exact path="/"
-          render={props => (
+          render={() => (
             <NoteList notes={this.state.notes} />
           )}
         />

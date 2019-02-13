@@ -20,6 +20,9 @@ export class NoteForm extends Component {
             textBody: response.data.textBody
           })
         })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
   
@@ -28,9 +31,13 @@ export class NoteForm extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  addNote = e => {
+  submitNote = e => {
     e.preventDefault();
-    this.props.addNote(this.state)
+    if(this.props.update) {
+      this.props.updateNote(this.state, this.props.match.params.id);
+    } else {
+      this.props.addNote(this.state);
+    }
     this.setState({ 
       title: '',
       textBody: ''
@@ -41,7 +48,7 @@ export class NoteForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.addNote}>
+        <form onSubmit={this.submitNote}>
           <input 
             type="text"
             name="title"
@@ -59,7 +66,7 @@ export class NoteForm extends Component {
             cols="36"
           >
           </textarea>
-          <button type="submit">Add note</button>
+          <button type="submit">{this.props.update ? "Update" : "Save"}</button>
         </form>
       </div>
     )

@@ -30,6 +30,13 @@ class App extends Component {
       })
   }
 
+  updateNote = (note, id) => {
+    axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   deleteNote = id => {
     axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
       .then(response => {
@@ -82,6 +89,7 @@ class App extends Component {
           render={props => (
             <NoteForm 
               update
+              updateNote={this.updateNote}
               notes={this.state.notes}
               {...props}
             />

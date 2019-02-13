@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import axios from 'axios';
+
 export class NoteForm extends Component {
   constructor(props) {
     super(props)
@@ -8,6 +10,19 @@ export class NoteForm extends Component {
        textBody: ''
     }
   }
+
+  componentDidMount = () => {
+    if(this.props.update) {
+      axios.get(`https://fe-notes.herokuapp.com/note/get/${this.props.match.params.id}`)
+        .then(response => {
+          this.setState({
+            title: response.data.title,
+            textBody: response.data.textBody
+          })
+        })
+    }
+  }
+  
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })

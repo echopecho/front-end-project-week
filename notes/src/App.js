@@ -77,6 +77,16 @@ class App extends Component {
             />
           )} 
         />
+        <Route 
+          path="/update/:id"
+          render={props => (
+            <NoteForm 
+              update
+              notes={this.state.notes}
+              {...props}
+            />
+          )}
+        />
       </div>
     );
   }

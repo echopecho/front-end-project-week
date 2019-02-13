@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export class Note extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ export class Note extends Component {
       <div>
         <h2>{this.state.note.title}</h2>
         <p>{this.state.note.textBody}</p>
+        <Link to={`/update/${this.state.note._id}`}>
+          <button>Edit</button>
+        </Link>
         <button onClick={this.deleteNote}>Delete</button>
       </div>
     )

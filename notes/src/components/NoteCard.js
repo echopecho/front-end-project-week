@@ -5,9 +5,12 @@ import styled from 'styled-components';
 const CardContainer = styled.div `
   border: 1px solid black;
   // width: 100%;
-  height: 180px;
+  height: 200px;
   padding: 10px;
   background-color: #fff;
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
   
   h3, p {
     color: black;
@@ -22,7 +25,11 @@ const CardContainer = styled.div `
 
   p {
     padding-top: 3px;
-    text-overflow: ellipsis;
+    line-height: 1.25;
+    overflow: hidden;
+    text-wrap: wrap;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
   }
 `
 

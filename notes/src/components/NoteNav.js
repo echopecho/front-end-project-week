@@ -14,9 +14,10 @@ const NavContainer = styled.div `
 
   h1 {
     display: inline-block;
-    padding-left: 12%;
+    width: 100%;
+    padding: 10%;
     line-height: .8;
-    margin-bottom: 20px;
+    margin: 0;
   }
   
   a {
@@ -39,7 +40,7 @@ const NavContainer = styled.div `
 const NoteNav = props => {
   return (
     <NavContainer>
-      <h1>Lambda Notes</h1>
+      <h1>Lambda <br/>Notes</h1>
       <Link to="/">
         <button>View Your Notes</button>
       </Link>

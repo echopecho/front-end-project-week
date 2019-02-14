@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+// import './App.css';
 import NoteList from './components/NoteList';
 import NoteForm from './components/NoteForm';
 import NoteNav from './components/NoteNav';
@@ -7,6 +7,13 @@ import Note from './components/Note';
 
 import { Route } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const AppContainer = styled.div `
+  width: 100%
+  box-sizing: border-box;
+  // padding: 0 20px;
+`
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +69,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <AppContainer>
         <Route path="/" component={NoteNav} />
         <Route exact path="/"
           render={() => (
@@ -98,7 +105,7 @@ class App extends Component {
             />
           )}
         />
-      </div>
+      </AppContainer>
     );
   }
 }

@@ -41,18 +41,19 @@ const DeleteModal = styled.div `
   padding: 0;
 
   .modal-box {
-    width: 40%;
-    height: 100px;
+    width: 35%;
+    height: 120px;
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #FBFAFB;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 
     .buttons {
       width: 100%;
       display: flex;
       justify-content: center;
-
 
       button {
         width: 30%;

@@ -80,7 +80,11 @@ export class NoteForm extends Component {
       title: '',
       textBody: ''
     })
-    this.props.history.push('/');
+    if(this.props.update) {
+      this.props.history.push(`/notes/${this.props.match.params.id}`)
+    } else {
+      this.props.history.push('/');
+    }
   }
   
   render() {

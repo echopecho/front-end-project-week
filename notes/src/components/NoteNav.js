@@ -40,7 +40,7 @@ const NavContainer = styled.div `
 const NoteNav = props => {
   return (
     <NavContainer>
-      <h1>Lambda <br/>Notes</h1>
+      <h1>Lambda<br/>Notes</h1>
       <Link to="/">
         <button>View Your Notes</button>
       </Link>

@@ -22,7 +22,6 @@ const ListContainer = styled.div `
   display: flex;
   flex-wrap: wrap;
   padding: 2%;
- 
   
   a {
     width: 29%;

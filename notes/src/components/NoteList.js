@@ -3,6 +3,7 @@ import NoteCard from './NoteCard';
 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const MainContainer = styled.div `
   width: 75%;
@@ -47,4 +48,10 @@ const NoteList = props => {
   )
 }
 
-export default NoteList;
+const mapStateToProps = state => {
+  return {
+    notes: state.notes
+  }
+}
+
+export default connect(mapStateToProps)(NoteList);

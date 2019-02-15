@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { fetchNotes } from './actions';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const NoteContainer = styled.div `
   width: 75%;
@@ -85,7 +87,7 @@ export class Note extends Component {
   }
   
   componentDidMount() {
-    let id = this.props.match.params.id;
+    let id = this.props.id;
     axios.get(`https://fe-notes.herokuapp.com/note/get/${id}`)
       .then(response => {
         this.setState({ note: response.data });
@@ -135,4 +137,11 @@ export class Note extends Component {
   }
 }
 
-export default Note;
+const mapStateToProps = state => {
+  return {
+    notes: state.notes,
+    id: state.selectedID
+  }
+}
+
+export default connect(mapStateToProps, { fetchNotes })(Note);

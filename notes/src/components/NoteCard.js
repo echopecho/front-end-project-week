@@ -1,6 +1,9 @@
 import React from 'react'
+import { selectNote } from './actions';
 
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
 
 const CardContainer = styled.div `
   border: 1px solid black;
@@ -35,11 +38,11 @@ const CardContainer = styled.div `
 
 const NoteCard = props => {
   return (
-    <CardContainer>
+    <CardContainer onClick={() => props.selectNote(props.note._id)}>
       <h3>{props.note.title}</h3>
       <p>{props.note.textBody}</p>
     </CardContainer>
   )
 }
 
-export default NoteCard;
+export default connect(null, { selectNote })(NoteCard);

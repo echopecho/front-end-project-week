@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import axios from 'axios';
 import styled from 'styled-components';
@@ -73,16 +73,9 @@ export class NoteForm extends Component {
     e.preventDefault();
     if(this.props.update) {
       this.props.updateNote(this.state, this.props.match.params.id);
+
     } else {
       this.props.addNote(this.state);
-    }
-    this.setState({ 
-      title: '',
-      textBody: ''
-    })
-    if(this.props.update) {
-      this.props.history.push(`/notes/${this.props.match.params.id}`)
-    } else {
       this.props.history.push('/');
     }
   }
@@ -91,7 +84,7 @@ export class NoteForm extends Component {
     return (
       <FormContainer>
         <div>
-          <h2>Create New Note:</h2>
+          <h2>{this.props.update ? "Update Note:" : "Create New Note:"}</h2>
         </div>
         <form onSubmit={this.submitNote}>
           <input 

@@ -73,7 +73,7 @@ export class NoteForm extends Component {
     e.preventDefault();
     if(this.props.update) {
       this.props.updateNote(this.state, this.props.match.params.id);
-
+      this.props.history.push(`/notes/${this.props.match.params.id}`);
     } else {
       this.props.addNote(this.state);
       this.props.history.push('/');

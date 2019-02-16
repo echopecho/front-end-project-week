@@ -1,7 +1,8 @@
 import React from 'react'
 import NoteCard from './NoteCard';
+import './Muuri.css';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import MuuriGrid from 'react-muuri';
@@ -21,22 +22,28 @@ const Header = styled.div `
 `
 
 const ListContainer = styled.div `
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   padding: 2%;
   position: relative;
 
   .item {
     position: absolute;
-    width: 20%;
-    height: 50px;
+    width: 31%;
+    height: 200px;
+    margin: 5px;
+    z-index: 1;
 
     .item-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
 
       a {
-        width: 29%;
-        margin: 20px 2%;  
+        // width: 29%;
+        // margin: 20px 2%;  
         text-decoration: none;
+        z-index: 1;
       }
     }
   }
@@ -51,7 +58,6 @@ const ListContainer = styled.div `
 class NoteList extends React.Component {
 
   componentDidMount () {
-    console.log(this.gridElement)
     this.grid = new MuuriGrid({
       node: this.gridElement,
       defaultOptions: {
@@ -74,9 +80,9 @@ class NoteList extends React.Component {
           {this.props.notes.map(note => (
             <div className="item" key={note._id}>
               <div className="item-content">
-                <Link to={`/notes/${note._id}`}>
+                {/* <Link to={`/notes/${note._id}`}> */}
                   <NoteCard note={note}  />
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
           ))}

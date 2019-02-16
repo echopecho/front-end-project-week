@@ -3,6 +3,8 @@ import { selectNote } from './actions';
 
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 
 const CardContainer = styled.div `
@@ -39,7 +41,9 @@ const CardContainer = styled.div `
 const NoteCard = props => {
   return (
     <CardContainer onClick={() => props.selectNote(props.note._id)}>
-      <h3>{props.note.title}</h3>
+      <Link to={`/notes/${props.note._id}`}>
+        <h3>{props.note.title}</h3>
+      </Link>
       <p>{props.note.textBody}</p>
     </CardContainer>
   )

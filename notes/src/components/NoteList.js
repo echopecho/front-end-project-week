@@ -1,14 +1,13 @@
 import React from 'react'
 import NoteCard from './NoteCard';
-import './Muuri.css';
 
-// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import MuuriGrid from 'react-muuri';
 
 const MainContainer = styled.div `
   width: 75%;
+  height: 100vh;
   background-color: #F2F1F2;
   margin-left: 25%;
 `
@@ -34,6 +33,18 @@ const ListContainer = styled.div `
     margin: 5px;
     z-index: 1;
 
+    &.muuri-item-dragging {
+      z-index: 3;   /* Required by Muuri */
+    }
+     
+    &.muuri-item-releasing {
+      z-index: 2; /* Required by Muuri */
+    }
+     
+    &.muuri-item-hidden {
+      z-index: 0; /* Required by Muuri */
+    }
+
     .item-content {
       position: relative;
       width: 100%;
@@ -58,12 +69,14 @@ const ListContainer = styled.div `
 class NoteList extends React.Component {
 
   componentDidMount () {
-    this.grid = new MuuriGrid({
-      node: this.gridElement,
-      defaultOptions: {
-        dragEnabled: true
-      },
-    });
+    setTimeout(() => {
+      this.grid = new MuuriGrid({
+        node: this.gridElement,
+        defaultOptions: {
+          dragEnabled: true
+        },
+      });
+    }, 50);
   }
 
   componentWillUnmount () {
@@ -80,9 +93,7 @@ class NoteList extends React.Component {
           {this.props.notes.map(note => (
             <div className="item" key={note._id}>
               <div className="item-content">
-                {/* <Link to={`/notes/${note._id}`}> */}
-                  <NoteCard note={note}  />
-                {/* </Link> */}
+                <NoteCard note={note}  />
               </div>
             </div>
           ))}

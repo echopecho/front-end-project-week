@@ -139,7 +139,6 @@ export class Note extends Component {
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes,
     id: state.selectedID
   }
 }

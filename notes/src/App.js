@@ -17,12 +17,6 @@ const AppContainer = styled.div `
 `
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //    notes: []
-    // }
-  }
 
   componentDidMount = () => {
     this.props.fetchNotes();

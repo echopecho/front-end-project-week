@@ -5,10 +5,10 @@ export const SUCCESS = 'SUCCESS';
 export const SELECT = 'SELECT';
 
 export const fetchNotes = () => dispatch => {
-  dispatch({ type: LOADING });
+  // dispatch({ type: LOADING });
   axios.get('https://fe-notes.herokuapp.com/note/get/all')
       .then(response => {
-        dispatch({ type: SUCCESS, payload: response.data})
+        dispatch({ type: SUCCESS, payload: response.data })
       })
       .catch(err => {
         console.log(err);

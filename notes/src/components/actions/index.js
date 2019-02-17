@@ -3,6 +3,7 @@ import axios from 'axios';
 export const LOADING = 'LOADING';
 export const SUCCESS = 'SUCCESS';
 export const SELECT = 'SELECT';
+export const DRAGGED = 'DRAGGED';
 
 export const fetchNotes = () => dispatch => {
   // dispatch({ type: LOADING });
@@ -13,6 +14,10 @@ export const fetchNotes = () => dispatch => {
       .catch(err => {
         console.log(err);
       })
+}
+
+export const dragSort = notes => {
+  return { type: DRAGGED, payload: notes }
 }
 
 export const selectNote = id => {

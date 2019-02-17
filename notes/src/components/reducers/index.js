@@ -1,4 +1,4 @@
-import { LOADING, SUCCESS, SELECT } from '../actions'
+import { LOADING, SUCCESS, SELECT, DRAGGED } from '../actions'
 
 const initialState = {
   notes: [],
@@ -11,9 +11,11 @@ export default (state = initialState, action) => {
     case SUCCESS:
       return { ...state, notes: action.payload, fetching: false };
     case LOADING:
-      return { ...state, note: [], fetching: true }
+      return { ...state, notes: [], fetching: true }
     case SELECT:
       return { ...state, selectedID: action.id }
+    case DRAGGED:
+      return { ...state, notes: action.payload }
     default:
       return state;
   }

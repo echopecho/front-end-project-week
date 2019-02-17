@@ -4,6 +4,7 @@ import NoteCard from './NoteCard';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import MuuriGrid from 'react-muuri';
+import { dragSort } from './actions';
 
 const MainContainer = styled.div `
   width: 75%;
@@ -29,6 +30,7 @@ const ListContainer = styled.div `
   .item {
     position: absolute;
     width: 31%;
+    max-width: 150px;
     height: 200px;
     margin: 5px;
     z-index: 1;
@@ -58,12 +60,6 @@ const ListContainer = styled.div `
       }
     }
   }
-  
-  // a {
-  //   width: 29%;
-  //   margin: 20px 2%;  
-  //   text-decoration: none;
-  // }
 `
 
 class NoteList extends React.Component {
@@ -76,7 +72,20 @@ class NoteList extends React.Component {
           dragEnabled: true
         },
       });
-    }, 50);
+
+      let dragElements = this.grid.grid._element.childNodes
+      
+      this.grid.getMethod('on', 'dragEnd', () => {
+        let arrSorted = [];
+        this.grid.getMethod('synchronize')
+        dragElements.forEach(e => {
+          let sorted = this.props.notes.filter(note => note._id === e.dataset.id);
+          arrSorted.push(sorted[0]);
+        })
+        this.props.dragSort(arrSorted);
+      
+      })
+    }, 200);
   }
 
   componentWillUnmount () {
@@ -91,9 +100,9 @@ class NoteList extends React.Component {
         </Header>
         <ListContainer ref={gridElement => this.gridElement = gridElement}>
           {this.props.notes.map(note => (
-            <div className="item" key={note._id}>
+            <div className="item" key={note._id} data-id={note._id}>
               <div className="item-content">
-                <NoteCard note={note}  />
+                <NoteCard note={note} />
               </div>
             </div>
           ))}
@@ -109,4 +118,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(NoteList);
+export default connect(mapStateToProps, { dragSort } )(NoteList);

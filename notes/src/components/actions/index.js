@@ -31,6 +31,21 @@ export const addNote = (newNote, oldNotes) => dispatch => {
     })
 }
 
+export const updateNote = (note, id, oldNotes) => dispatch => {
+  let newState = [];
+  axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
+    .then(response => {
+      newState = oldNotes.map(e => {
+        if(id === e._id) {
+          return { ...e, title: response.data.title, textBody: response.data.textBody }
+        } else {
+          return { ...e }
+        }
+      })
+      dispatch({ type: SUCCESS, payload: newState })
+    })
+}
+
 export const dragSort = notes => {
   return { type: DRAGGED, payload: notes }
 }

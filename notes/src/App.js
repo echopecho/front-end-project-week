@@ -91,7 +91,6 @@ class App extends Component {
           render={props => (
             <NoteForm 
               update
-              updateNote={this.updateNote}
               {...props}
             />
           )}

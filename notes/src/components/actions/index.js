@@ -16,6 +16,21 @@ export const fetchNotes = () => dispatch => {
       })
 }
 
+export const addNote = (newNote, oldNotes) => dispatch => {
+  let newState = [ ...oldNotes ];
+  axios.post('https://fe-notes.herokuapp.com/note/create', newNote)
+    .then(response => {
+      axios.get(`https://fe-notes.herokuapp.com/note/get/${response.data.success}`)
+        .then(res => {
+          newState.push(res.data);
+          dispatch({ type: SUCCESS, payload: newState })
+        })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 export const dragSort = notes => {
   return { type: DRAGGED, payload: notes }
 }

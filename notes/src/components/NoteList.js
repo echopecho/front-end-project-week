@@ -5,10 +5,12 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import MuuriGrid from 'react-muuri';
 import { dragSort } from './actions';
+import { Link } from 'react-router-dom';
+
 
 const MainContainer = styled.div `
   width: 75%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #F2F1F2;
   margin-left: 25%;
 `
@@ -69,7 +71,12 @@ class NoteList extends React.Component {
       this.grid = new MuuriGrid({
         node: this.gridElement,
         defaultOptions: {
-          dragEnabled: true
+          dragEnabled: true,
+          dragStartPredicate: {
+            distance: 20,
+            delay: 0,
+            handle: false
+          }
         },
       });
 
@@ -85,7 +92,7 @@ class NoteList extends React.Component {
         this.props.dragSort(arrSorted);
       
       })
-    }, 200);
+    }, 250);
   }
 
   componentWillUnmount () {
@@ -102,7 +109,9 @@ class NoteList extends React.Component {
           {this.props.notes.map(note => (
             <div className="item" key={note._id} data-id={note._id}>
               <div className="item-content">
-                <NoteCard note={note} />
+                <Link to={`/notes/${note._id}`}>
+                  <NoteCard note={note} />
+                </Link>
               </div>
             </div>
           ))}

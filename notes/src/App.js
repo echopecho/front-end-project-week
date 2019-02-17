@@ -22,15 +22,15 @@ class App extends Component {
     this.props.fetchNotes();
   }
 
-  addNote = note => {
-    axios.post('https://fe-notes.herokuapp.com/note/create', note)
-      .then(() => {
-        this.props.fetchNotes();
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
+  // addNote = note => {
+  //   axios.post('https://fe-notes.herokuapp.com/note/create', note)
+  //     .then(() => {
+  //       this.props.fetchNotes();
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
 
   updateNote = (note, id) => {
     axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
@@ -82,7 +82,6 @@ class App extends Component {
           path="/add"
           render={props => (
             <NoteForm 
-              addNote={this.addNote}
               history={props.history}
             />
           )} 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { addNote } from './actions';
 
 const FormContainer = styled.div `
   width: 75%;
@@ -75,7 +77,7 @@ export class NoteForm extends Component {
       this.props.updateNote(this.state, this.props.match.params.id);
       // this.props.history.push(`/notes/${this.props.match.params.id}`);
     } else {
-      this.props.addNote(this.state);
+      this.props.addNote(this.state, this.props.notes);
       // this.props.history.push('/');
     }
     this.props.history.push('/');
@@ -112,4 +114,10 @@ export class NoteForm extends Component {
   }
 }
 
-export default NoteForm;
+const mapStateToProps = state => {
+  return {
+    notes: state.notes
+  }
+}
+
+export default connect(mapStateToProps, { addNote })(NoteForm);

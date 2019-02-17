@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchNotes } from './actions';
+import { fetchNotes, deleteNote } from './actions';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -102,7 +102,7 @@ export class Note extends Component {
   }
 
   deleteNote = () => {
-    this.props.deleteNote(this.state.note._id);
+    this.props.deleteNote(this.state.note._id, this.props.notes);
     this.props.history.push('/');
   }
   
@@ -139,8 +139,9 @@ export class Note extends Component {
 
 const mapStateToProps = state => {
   return {
+    notes: state.notes,
     id: state.selectedID
   }
 }
 
-export default connect(mapStateToProps, { fetchNotes })(Note);
+export default connect(mapStateToProps, { fetchNotes, deleteNote })(Note);

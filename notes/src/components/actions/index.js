@@ -46,6 +46,15 @@ export const updateNote = (note, id, oldNotes) => dispatch => {
     })
 }
 
+export const deleteNote = (id, oldNotes) => dispatch => {
+  let newState = [];
+  axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
+    .then(() => {
+      newState = oldNotes.filter(note => note._id !== id)
+      dispatch({ type: SUCCESS, payload: newState})
+    })
+}
+
 export const dragSort = notes => {
   return { type: DRAGGED, payload: notes }
 }

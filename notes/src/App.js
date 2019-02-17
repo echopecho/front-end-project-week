@@ -8,7 +8,7 @@ import { fetchNotes } from './components/actions';
 
 import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -32,25 +32,25 @@ class App extends Component {
   //     })
   // }
 
-  updateNote = (note, id) => {
-    axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
-      .then(() => {
-        this.props.fetchNotes();
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
+  // updateNote = (note, id) => {
+  //   axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
+  //     .then(() => {
+  //       this.props.fetchNotes();
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
 
-  deleteNote = id => {
-    axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
-      .then(() => {
-        this.props.fetchNotes();
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
+  // deleteNote = id => {
+  //   axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
+  //     .then(() => {
+  //       this.props.fetchNotes();
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
   
   // fetchNotes = () => {
   //   axios.get('https://fe-notes.herokuapp.com/note/get/all')
@@ -73,7 +73,6 @@ class App extends Component {
           path="/notes/:id"
           render={props => (
             <Note 
-              deleteNote={this.deleteNote}
               {...props}
             />
           )}

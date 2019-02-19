@@ -3,18 +3,22 @@ import { selectNote } from './actions';
 
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
 
 
 
 const CardContainer = styled.div `
   border: 1px solid black;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   padding: 10px;
   background-color: #fff;
   overflow: hidden;
   // white-space: no-wrap;
   // text-overflow: ellipsis;
+
+  &.found {
+    background-color: red;
+  }
   
   h3, p {
     color: black;
@@ -40,13 +44,20 @@ const CardContainer = styled.div `
 
 const NoteCard = props => {
   return (
-    <CardContainer onClick={() => props.selectNote(props.note._id)}>
-      {/* <Link to={`/notes/${props.note._id}`}> */}
-        <h3>{props.note.title}</h3>
-      {/* </Link> */}
+    <CardContainer 
+      onClick={() => props.selectNote(props.note._id)}
+      className={ props.foundItems.includes(props.note._id) ? "found" : null }
+    >
+      <h3>{props.note.title}</h3>
       <p>{props.note.textBody}</p>
     </CardContainer>
   )
 }
 
-export default connect(null, { selectNote })(NoteCard);
+const mapStateToProps = state => {
+  return {
+    foundItems: state.foundItems
+  }
+}
+
+export default connect(mapStateToProps, { selectNote })(NoteCard);

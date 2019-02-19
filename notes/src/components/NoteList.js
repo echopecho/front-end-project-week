@@ -4,7 +4,7 @@ import NoteCard from './NoteCard';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import MuuriGrid from 'react-muuri';
-import { dragSort } from './actions';
+import { dragSort, search } from './actions';
 import { Link } from 'react-router-dom';
 
 
@@ -17,6 +17,8 @@ const MainContainer = styled.div `
 
 const Header = styled.div `
   padding: 20px 20px 0;
+  display: flex;
+  justify-content: space-between;
 
   h2 {
     margin: 0;
@@ -36,13 +38,17 @@ const ListContainer = styled.div `
     height: 200px;
     margin: 5px;
     z-index: 1;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+    transition: box-shadow .2s linear;
 
     &.muuri-item-dragging {
-      z-index: 3;   /* Required by Muuri */
+      z-index: 3;
+      box-shadow: 10px 10px 14px rgba(0,0,0,0.25);
     }
      
     &.muuri-item-releasing {
-      z-index: 2; /* Required by Muuri */
+      z-index: 2;
+      box-shadow: 10px 10px 14px rgba(0,0,0,0.25);
     }
      
     &.muuri-item-hidden {
@@ -65,6 +71,12 @@ const ListContainer = styled.div `
 `
 
 class NoteList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      textInput: ''
+    }
+  }
 
   componentDidMount () {
     setTimeout(() => {
@@ -73,7 +85,7 @@ class NoteList extends React.Component {
         defaultOptions: {
           dragEnabled: true,
           dragStartPredicate: {
-            distance: 20,
+            distance: 1,
             delay: 0,
             handle: false
           }
@@ -99,11 +111,29 @@ class NoteList extends React.Component {
     this.grid.getMethod('destroy');
   }
 
+  inputChange = e => {
+    this.setState({ textInput: e.target.value })
+  }
+
+  submitSearch = e => {
+    e.preventDefault();
+    this.props.search(this.state.textInput, this.props.notes);
+  }
+
   render() {
     return (
       <MainContainer>
         <Header>
           <h2>Your Notes:</h2>
+          <form onSubmit={this.submitSearch}>
+            <input 
+              type="text"
+              value={this.state.textInput}
+              placeholder="search"
+              onChange={this.inputChange}
+            >
+            </input>
+          </form>
         </Header>
         <ListContainer ref={gridElement => this.gridElement = gridElement}>
           {this.props.notes.map(note => (
@@ -127,4 +157,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { dragSort } )(NoteList);
+export default connect(mapStateToProps, { dragSort, search } )(NoteList);

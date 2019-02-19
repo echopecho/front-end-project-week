@@ -4,6 +4,7 @@ export const LOADING = 'LOADING';
 export const SUCCESS = 'SUCCESS';
 export const SELECT = 'SELECT';
 export const DRAGGED = 'DRAGGED';
+export const QUERY = 'QUERY';
 
 export const fetchNotes = () => dispatch => {
   // dispatch({ type: LOADING });
@@ -53,6 +54,14 @@ export const deleteNote = (id, oldNotes) => dispatch => {
       newState = oldNotes.filter(note => note._id !== id)
       dispatch({ type: SUCCESS, payload: newState})
     })
+}
+
+export const search = (query, notes) => {
+  console.log("This was totes searched: " + query)
+  let foundItems = notes.filter(note => note.title.includes(query) || note.textBody.includes(query)).map(el => el._id)
+  console.log(foundItems)
+  console.log(foundItems.includes(notes[1]._id));
+  return { type: QUERY, payload: foundItems }
 }
 
 export const dragSort = notes => {

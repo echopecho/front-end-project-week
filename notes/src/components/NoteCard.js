@@ -3,6 +3,7 @@ import { selectNote } from './actions';
 
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 
 
 
@@ -34,7 +35,7 @@ const CardContainer = styled.div `
     text-overflow: ellipsis;
   }
 
-  p {
+  .text-body {
     padding-top: 3px;
     line-height: 1.25;
     overflow: hidden;
@@ -49,7 +50,7 @@ const NoteCard = props => {
       className={ props.foundItems.includes(props.note._id) ? "found" : null }
     >
       <h3>{props.note.title}</h3>
-      <p>{props.note.textBody}</p>
+      <ReactMarkdown className="text-body" source={props.note.textBody} />
     </CardContainer>
   )
 }

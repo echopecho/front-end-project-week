@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 
 const NoteContainer = styled.div `
   width: 75%;
@@ -114,8 +115,9 @@ export class Note extends Component {
     }
     return (
       <NoteContainer>
-        <h2>{this.state.note.title}</h2>
-        <p>{this.state.note.textBody}</p>
+        {/* <h2>{this.state.note.title}</h2>
+        <p>{this.state.note.textBody}</p> */}
+        <ReactMarkdown source={`## ${this.state.note.title}\n\n ${this.state.note.textBody}`} />
         <EditButtons>
           <Link to={`/update/${this.state.note._id}`}>
             <button>edit</button>

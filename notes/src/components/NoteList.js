@@ -34,7 +34,7 @@ const ListContainer = styled.div `
   .item {
     position: absolute;
     width: 31%;
-    max-width: 150px;
+    max-width: 250px;
     height: 200px;
     margin: 5px;
     z-index: 1;
@@ -104,7 +104,7 @@ class NoteList extends React.Component {
         this.props.dragSort(arrSorted);
       
       })
-    }, 250);
+    }, 500);
   }
 
   componentWillUnmount () {

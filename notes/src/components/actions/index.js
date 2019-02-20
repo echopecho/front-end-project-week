@@ -57,10 +57,11 @@ export const deleteNote = (id, oldNotes) => dispatch => {
 }
 
 export const search = (query, notes) => {
-  console.log("This was totes searched: " + query)
-  let foundItems = notes.filter(note => note.title.includes(query) || note.textBody.includes(query)).map(el => el._id)
-  console.log(foundItems)
-  console.log(foundItems.includes(notes[1]._id));
+  let foundItems = notes
+                  .filter(note => 
+                    note.title.toLowerCase().includes(query.toLowerCase()) || note.textBody.toLowerCase().includes(query.toLowerCase())
+                  )
+                  .map(el => el._id)
   return { type: QUERY, payload: foundItems }
 }
 

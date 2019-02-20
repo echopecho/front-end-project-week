@@ -50,7 +50,11 @@ const NoteCard = props => {
       className={ props.foundItems.includes(props.note._id) ? "found" : null }
     >
       <h3>{props.note.title}</h3>
-      <ReactMarkdown className="text-body" source={props.note.textBody} />
+      <ReactMarkdown 
+        className="text-body" 
+        source={props.note.textBody}
+        disallowedTypes={['link']}
+      />
     </CardContainer>
   )
 }

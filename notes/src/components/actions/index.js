@@ -5,9 +5,13 @@ export const SUCCESS = 'SUCCESS';
 export const SELECT = 'SELECT';
 export const DRAGGED = 'DRAGGED';
 export const QUERY = 'QUERY';
+export const CLEAR = 'CLEAR';
+
+export const toggleLoading = () => {
+  return { type: LOADING }
+}
 
 export const fetchNotes = () => dispatch => {
-  // dispatch({ type: LOADING });
   axios.get('https://fe-notes.herokuapp.com/note/get/all')
       .then(response => {
         dispatch({ type: SUCCESS, payload: response.data })
@@ -71,4 +75,8 @@ export const dragSort = notes => {
 
 export const selectNote = id => {
   return { type: SELECT, id: id }
+}
+
+export const clearSearch = () => {
+  return { type: CLEAR }
 }

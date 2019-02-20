@@ -4,7 +4,7 @@ import NoteCard from './NoteCard';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import MuuriGrid from 'react-muuri';
-import { dragSort, search } from './actions';
+import { dragSort, search, toggleLoading, clearSearch } from './actions';
 import { Link } from 'react-router-dom';
 
 
@@ -101,10 +101,11 @@ class NoteList extends React.Component {
           let sorted = this.props.notes.filter(note => note._id === e.dataset.id);
           arrSorted.push(sorted[0]);
         })
+        
         this.props.dragSort(arrSorted);
-      
+        
       })
-    }, 500);
+    }, 500);  
   }
 
   componentWillUnmount () {
@@ -133,8 +134,12 @@ class NoteList extends React.Component {
               onChange={this.inputChange}
             >
             </input>
+            <div onClick={this.props.clearSearch}>Clear Search</div>
           </form>
         </Header>
+        {this.props.loading ? 
+          <h2>Loading...</h2> :
+          
         <ListContainer ref={gridElement => this.gridElement = gridElement}>
           {this.props.notes.map(note => (
             <div className="item" key={note._id} data-id={note._id}>
@@ -146,6 +151,7 @@ class NoteList extends React.Component {
             </div>
           ))}
         </ListContainer>
+        }
       </MainContainer>
     )
   }
@@ -153,8 +159,9 @@ class NoteList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes
+    notes: state.notes,
+    loading: state.fetching
   }
 }
 
-export default connect(mapStateToProps, { dragSort, search } )(NoteList);
+export default connect(mapStateToProps, { dragSort, search, toggleLoading, clearSearch } )(NoteList);

@@ -1,5 +1,5 @@
 import React from 'react'
-import { selectNote } from './actions';
+import { selectNote, amendDeleteList } from './actions';
 
 import { CardContainer } from '../components/style';
 import { connect } from 'react-redux';
@@ -84,8 +84,9 @@ class NoteCard extends React.Component {
     }
   }
 
-  delete = () => {
-    this.setState({ delete: true })
+  toggleDelete = () => {
+    this.props.amendDeleteList(this.props.note._id, this.props.listToDelete, this.state.delete)
+    this.setState({ delete: !this.state.delete })
   }
 
   render() {
@@ -97,7 +98,7 @@ class NoteCard extends React.Component {
       <div className="card-front">
       <div className="card-header">
         <h3>{this.props.note.title}</h3>
-        <button onClick={this.delete}>Delete</button>
+        <button onClick={this.toggleDelete}>Delete</button>
       </div>
       <Link to={`/notes/${this.props.note._id}`}>
         <ReactMarkdown 
@@ -108,7 +109,8 @@ class NoteCard extends React.Component {
       </Link>
       </div>
       <div className="card-back">
-        Back
+        <h3>{this.props.note.title}</h3>
+        <button onClick={this.toggleDelete}>Undo</button>
       </div>
     </CardContainer>
   )
@@ -118,8 +120,9 @@ class NoteCard extends React.Component {
 const mapStateToProps = state => {
   return {
     foundItems: state.foundItems,
-    searched: state.activeSearch
+    searched: state.activeSearch,
+    listToDelete: state.deleteList
   }
 }
 
-export default connect(mapStateToProps, { selectNote })(NoteCard);
+export default connect(mapStateToProps, { selectNote, amendDeleteList })(NoteCard);

@@ -93,16 +93,11 @@ export const CardContainer = styled.div `
   border: 1px solid black;
   width: 100%;
   height: 100%;
-  // overflow: hidden;
   background-color: #fff;
   position: relative:
   transition: all .6s;
-  transition: transform 1s linear;
+  transition: all .6s linear;  
   transform-style: preserve-3d;
-
-  &.delete {
-    transform: rotateY(180deg);
-  }
 
   &.found {
     background-color: #24B8BD;
@@ -118,12 +113,16 @@ export const CardContainer = styled.div `
     opacity: 0.4;
   }
 
+  &.delete {
+    transform: rotateY(180deg);
+  }
+
   .card-front, .card-back {
     position: absolute;
-    // overflow: hidden;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    padding: 5px;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
   }
 
@@ -136,9 +135,9 @@ export const CardContainer = styled.div `
 
       h3 {
         padding-bottom: 3px;
-        // overflow: hidden;
-        // white-space: nowrap;
-        // text-overflow: ellipsis;  
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;  
       }
     }
   }
@@ -152,13 +151,17 @@ export const CardContainer = styled.div `
   a .text-body {
     padding-top: 3px;
     line-height: 1.25;
-    // overflow: hidden;
+    overflow: hidden;
     // text-wrap: wrap;
-    height: 100px;
+    height: 164px;
   }
 
   .card-back {
     transform: rotateY(180deg);
     background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `

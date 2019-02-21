@@ -6,6 +6,7 @@ export const SELECT = 'SELECT';
 export const DRAGGED = 'DRAGGED';
 export const QUERY = 'QUERY';
 export const CLEAR = 'CLEAR';
+export const ADD_DELETE = 'ADD_DELETE '
 
 export const toggleLoading = () => {
   return { type: LOADING }
@@ -58,6 +59,26 @@ export const deleteNote = (id, oldNotes) => dispatch => {
       newState = oldNotes.filter(note => note._id !== id)
       dispatch({ type: SUCCESS, payload: newState})
     })
+}
+
+export const amendDeleteList = (id, oldDeletes, deletable) => {
+  let temp = [...oldDeletes];
+
+  if(!deletable) {
+    temp.push(id);
+  } else {
+    temp = temp.filter(item => item !== id)
+  }
+  
+  let newDeletes = [...new Set(temp)];
+  console.log(newDeletes);
+  return { type: ADD_DELETE, payload: newDeletes }
+}
+
+export const deleteAll = (deletes, oldState) => {
+  let newState = [];
+  newState = oldState.filter(note => !deletes.includes(note._id));
+  return { type: SUCCESS, payload: newState }
 }
 
 export const search = (query, notes) => {

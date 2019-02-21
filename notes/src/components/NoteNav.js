@@ -1,6 +1,9 @@
 import React from 'react'
+import { deleteAll } from './actions';
 
+import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const NavContainer = styled.div `
@@ -37,7 +40,16 @@ const NavContainer = styled.div `
   }
 `
 
-const NoteNav = props => {
+class NoteNav extends React.Component {
+
+  confirmDeleteAll = () => {
+    this.props.listToDelete.forEach(note => {
+      axios.delete(`https://fe-notes.herokuapp.com/note/delete/${note}`)
+    })
+    this.props.deleteAll(this.props.listToDelete, this.props.notes);
+  }
+
+  render() {
   return (
     <NavContainer>
       <h1>Lambda<br/>Notes</h1>
@@ -47,8 +59,20 @@ const NoteNav = props => {
       <Link to="/add">
         <button>+ Create New Note</button>
       </Link>
+      {this.props.listToDelete.length > 0 ? 
+        <button onClick={this.confirmDeleteAll}>Delete All</button> :
+        null
+      }
     </NavContainer>
   )
+  }
 }
 
-export default NoteNav;
+const mapStateToProps = state => {
+  return {
+    listToDelete: state.deleteList,
+    notes: state.notes
+  }
+}
+
+export default connect(mapStateToProps, { deleteAll })(NoteNav);

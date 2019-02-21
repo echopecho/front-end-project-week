@@ -12,7 +12,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type) {
     case SUCCESS:
-      return { ...state, notes: action.payload,deleteList: [], foundItems: action.payload, fetching: false };
+      return { ...state, notes: action.payload,deleteList: [], foundItems: action.payload, fetching: false, activeSearch: false };
     case LOADING:
       return { ...state, fetching: !state.fetching }
     case SELECT:

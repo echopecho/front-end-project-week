@@ -134,7 +134,14 @@ class NoteList extends React.Component {
     }, 500);  
   }
 
-  componentWillUnmount () {
+  componentDidUpdate() {
+    if(this.grid) {
+      this.grid.getMethod('refreshItems');
+      this.grid.getMethod('layout');
+    }
+  }
+
+  componentWillUnmount() {
     this.grid.getMethod('destroy');
   }
 

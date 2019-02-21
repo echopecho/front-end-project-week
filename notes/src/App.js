@@ -8,13 +8,13 @@ import { fetchNotes } from './components/actions';
 
 import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
-// import axios from 'axios';
-import styled from 'styled-components';
+import { AppContainer } from './components/style';
+// import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-const AppContainer = styled.div `
-  width: 100%
-`
+// const AppContainer = styled.div `
+//   width: 100%
+// `
 
 class App extends Component {
 

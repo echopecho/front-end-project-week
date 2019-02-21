@@ -1,67 +1,124 @@
 import React from 'react'
 import { selectNote } from './actions';
 
-import styled from 'styled-components';
+import { CardContainer } from '../components/style';
 import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 
 
-const CardContainer = styled.div `
-  border: 1px solid black;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  background-color: #fff;
-  overflow: hidden;
-  // white-space: no-wrap;
-  // text-overflow: ellipsis;
+// const CardContainer = styled.div `
+//   border: 1px solid black;
+//   width: 100%;
+//   height: 100%;
+//   // padding: 10px;
+//   background-color: #fff;
+//   overflow: hidden;
+//   position: relative:
+//   background-color: red;
+//   transition: all .6s;
 
-  &.found {
-    background-color: red;
-  }
+//   &.found {
+//     background-color: #24B8BD;
+//     transform: scale(1.05);
+//     box-shadow: 4px 4px 4px rgba(0,0,0,0.25);
+
+//     h3, .text-body {
+//       color: white;
+//     }
+//   }
+
+//   &.not-found {
+//     opacity: 0.4;
+//   }
+
+//   .card-front, .card-back {
+//     position: absolute;
+//     overflow: hidden;
+//     width: 100%;
+//     height: 100%;
+//     backface-visibility: hidden;
+//   }
+
+//   .card-front {
+
+//     .card-header {
+//       display: flex;
+//       justify-content: space-between;
+//       border-bottom: 1px solid black;
+
+//       h3 {
+//         padding-bottom: 3px;
+//         overflow: hidden;
+//         white-space: nowrap;
+//         text-overflow: ellipsis;
+//       }
+//     }
+//   }
   
-  h3, p {
-    color: black;
-    margin: 0;
-    overflow-wrap: break-word;
+//   h3, .text-body {
+//     color: black;
+//     margin: 0;
+//     overflow-wrap: break-word;
+//   }
+
+//   a .text-body {
+//     padding-top: 3px;
+//     line-height: 1.25;
+//     overflow: hidden;
+//     text-wrap: wrap;
+//     height: 100px;
+//   }
+
+//   .card-back {
+//     transform: rotateY(180deg);
+//   }
+// `
+
+class NoteCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      delete: false
+    }
   }
 
-  h3 {
-    border-bottom: 1px solid black;
-    padding-bottom: 3px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  delete = () => {
+    this.setState({ delete: true })
   }
 
-  .text-body {
-    padding-top: 3px;
-    line-height: 1.25;
-    overflow: hidden;
-    text-wrap: wrap;
-  }
-`
-
-const NoteCard = props => {
+  render() {
   return (
     <CardContainer 
-      onClick={() => props.selectNote(props.note._id)}
-      className={ props.foundItems.includes(props.note._id) ? "found" : null }
+      onClick={() => this.props.selectNote(this.props.note._id)}
+      className={`${this.state.delete ? "delete" : null} ${this.props.foundItems.includes(this.props.note._id) ? "found" : this.props.searched ? "not-found" : null}` }
     >
-      <h3>{props.note.title}</h3>
-      <ReactMarkdown 
-        className="text-body" 
-        source={props.note.textBody}
-        disallowedTypes={['link']}
-      />
+      <div className="card-front">
+      <div className="card-header">
+        <h3>{this.props.note.title}</h3>
+        <button onClick={this.delete}>Delete</button>
+      </div>
+      <Link to={`/notes/${this.props.note._id}`}>
+        <ReactMarkdown 
+          className="text-body" 
+          source={this.props.note.textBody}
+          disallowedTypes={['link', 'linkReference']}
+        />
+      </Link>
+      </div>
+      <div className="card-back">
+        Back
+      </div>
     </CardContainer>
   )
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    foundItems: state.foundItems
+    foundItems: state.foundItems,
+    searched: state.activeSearch
   }
 }
 

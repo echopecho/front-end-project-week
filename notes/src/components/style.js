@@ -15,17 +15,29 @@ export const MainHeader = styled.div `
   width: 100%;
   padding: 20px 20px 0;
   display: flex;
-  justify-content: space-between;
+  position: relative;
 
   h2 {
     margin: 0;
   }
 
-  form input {
-    padding-left: 5px;
+  form {
+    position: absolute;
+    right: 5%;
+    width: 30%;
+    max-width: 200px;
+
+    input {
+      width: 100%;
+      padding-left: 5px;
+    }
   }
 
+  
+
   div {
+    position: absolute;
+    right: 5%;
     width: 15%;
     background-color: #24B8BD;
     color: white;
@@ -37,10 +49,10 @@ export const MainHeader = styled.div `
 `
 
 export const ListContainer = styled.div `
-  // display: flex;
-  // flex-wrap: wrap;
-  padding: 2%;
+  width: 96%;
   position: relative;
+  top: 10px;
+  left: 4%;
 
   .item {
     position: absolute;
@@ -48,7 +60,6 @@ export const ListContainer = styled.div `
     max-width: 250px;
     height: 200px;
     margin: 5px;
-    // box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
     transition: box-shadow .2s linear;
 
     &.muuri-item-dragging {
@@ -69,23 +80,11 @@ export const ListContainer = styled.div `
       position: relative;
       width: 100%;
       height: 100%;
-      // background-color: transparent;
-      // border: 1px solid black;
       perspective: 1000px;
 
       a {
-        // width: 29%;
-        // margin: 20px 2%;  
         text-decoration: none;
       }
-       div {
-        //  transition: transform 1s linear;
-        //  transform-style: preserve-3d;
-       }
-
-      // &:hover div {
-      //   transform: rotateY(180deg);
-      // }
     }
   }
 `
@@ -139,29 +138,52 @@ export const CardContainer = styled.div `
         white-space: nowrap;
         text-overflow: ellipsis;  
       }
+
+      button {
+        width: 26px;
+        height: 26px;
+        background-color: #24B8BD;
+        color: white;
+        font-weight: bold;
+        border: none;
+        margin-bottom: 5px;
+      }
     }
   }
   
   h3, .text-body {
     color: black;
     margin: 0;
-    // overflow-wrap: break-word;
   }
 
   a .text-body {
     padding-top: 3px;
     line-height: 1.25;
     overflow: hidden;
-    // text-wrap: wrap;
-    height: 164px;
+    height: 160px;
   }
 
   .card-back {
+    width: 100%;
     transform: rotateY(180deg);
-    background-color: red;
+    background-color: #CA001A;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+
+    h3 {
+      color: white;
+      font-weight: bold;
+    }
+
+    button {
+      width: 40%;
+      height: 32px;
+      background-color: #24B8BD;
+      font-weight: bold;
+      color: white;
+      border: none;
+    }
   }
 `

@@ -98,7 +98,7 @@ class NoteCard extends React.Component {
       <div className="card-front">
       <div className="card-header">
         <h3>{this.props.note.title}</h3>
-        <button onClick={this.toggleDelete}>Delete</button>
+        <button onClick={this.toggleDelete}>X</button>
       </div>
       <Link to={`/notes/${this.props.note._id}`}>
         <ReactMarkdown 

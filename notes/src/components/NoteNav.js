@@ -38,6 +38,12 @@ const NavContainer = styled.div `
       cursor: pointer;
     }
   }
+
+  div img {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+  }
 `
 
 class NoteNav extends React.Component {
@@ -60,7 +66,10 @@ class NoteNav extends React.Component {
         <button>+ Create New Note</button>
       </Link>
       {this.props.listToDelete.length > 0 ? 
-        <button onClick={this.confirmDeleteAll}>Delete All</button> :
+        <div onClick={this.confirmDeleteAll}>
+          <img src={require('./../img/trashcan.png')} alt="" />
+        </div> :
+        // <button onClick={this.confirmDeleteAll}>Delete All</button> :
         null
       }
     </NavContainer>

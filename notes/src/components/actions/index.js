@@ -71,7 +71,6 @@ export const amendDeleteList = (id, oldDeletes, deletable) => {
   }
   
   let newDeletes = [...new Set(temp)];
-  console.log(newDeletes);
   return { type: ADD_DELETE, payload: newDeletes }
 }
 

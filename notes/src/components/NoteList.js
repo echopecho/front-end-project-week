@@ -115,14 +115,14 @@ class NoteList extends React.Component {
             delay: 0,
             handle: false
           }
-        },
+        }
       });
 
       let dragElements = this.grid.grid._element.childNodes
       
       this.grid.getMethod('on', 'dragEnd', () => {
         let arrSorted = [];
-        this.grid.getMethod('synchronize')
+        this.grid.getMethod('synchronize');
         dragElements.forEach(e => {
           let sorted = this.props.notes.filter(note => note._id === e.dataset.id);
           arrSorted.push(sorted[0]);
@@ -131,7 +131,8 @@ class NoteList extends React.Component {
         this.props.dragSort(arrSorted);
         
       })
-    }, 500);  
+
+    }, 500);
   }
 
   componentDidUpdate() {

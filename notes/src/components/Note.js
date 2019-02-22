@@ -18,17 +18,14 @@ export class Note extends Component {
   }
   
   componentDidMount() {
-    let id = this.props.id;
-    axios.get(`https://fe-notes.herokuapp.com/note/get/${id}`)
-      .then(response => {
-        this.setState({ note: response.data });
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    this.updateNote();
   }
 
   componentDidUpdate() {
+    this.updateNote();
+  }
+
+  updateNote = () => {
     let id = this.props.id;
     axios.get(`https://fe-notes.herokuapp.com/note/get/${id}`)
       .then(response => {
@@ -40,7 +37,7 @@ export class Note extends Component {
   }
 
   confirmDelete = () => {
-    this.setState({ deletePrompt: !this.state.deletePrompt })
+    this.setState({ deletePrompt: !this.state.deletePrompt });
   }
 
   deleteNote = () => {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './App.css';
 import NoteList from './components/NoteList';
 import NoteForm from './components/NoteForm';
 import NoteNav from './components/NoteNav';
@@ -9,12 +8,8 @@ import { fetchNotes } from './components/actions';
 import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
 import { AppContainer } from './components/note-list-style';
-// import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-// const AppContainer = styled.div `
-//   width: 100%
-// `
 
 class App extends Component {
 
@@ -22,68 +17,24 @@ class App extends Component {
     this.props.fetchNotes();
   }
 
-  // addNote = note => {
-  //   axios.post('https://fe-notes.herokuapp.com/note/create', note)
-  //     .then(() => {
-  //       this.props.fetchNotes();
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // updateNote = (note, id) => {
-  //   axios.put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
-  //     .then(() => {
-  //       this.props.fetchNotes();
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // deleteNote = id => {
-  //   axios.delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
-  //     .then(() => {
-  //       this.props.fetchNotes();
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-  
-  // fetchNotes = () => {
-  //   axios.get('https://fe-notes.herokuapp.com/note/get/all')
-  //     .then(response => {
-  //       this.setState({ notes: response.data })
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
   render() {
     return (
       <AppContainer>
-        <Route path="/" component={NoteNav} />
-        <Route exact path="/"
+        <Route 
+          path="/" 
+          component={NoteNav} 
+        />
+        <Route 
+          exact path="/"
           component={NoteList}
         />
         <Route 
           path="/notes/:id"
-          render={props => (
-            <Note 
-              {...props}
-            />
-          )}
+          component={Note}
         />
         <Route
           path="/add"
-          render={props => (
-            <NoteForm 
-              history={props.history}
-            />
-          )} 
+          component={NoteForm}
         />
         <Route 
           path="/update/:id"

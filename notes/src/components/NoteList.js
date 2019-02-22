@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import NoteCard from './NoteCard';
 
 import { MainContainer, MainHeader, ListContainer } from './note-list-style';
@@ -21,7 +21,7 @@ class NoteList extends React.Component {
         node: this.gridElement,
         defaultOptions: {
           dragEnabled: true,
-          dragStartPredicate: {
+          dragStartPredicate: { // ** Required to allow click events to functions properly **
             distance: 1,
             delay: 0,
             handle: false
@@ -33,20 +33,24 @@ class NoteList extends React.Component {
       
       this.grid.getMethod('on', 'dragEnd', () => {
         let arrSorted = [];
+
+        // Match the DOM with what is displayed after dropping element
         this.grid.getMethod('synchronize');
+
+        // Match the Store with the DOM
         dragElements.forEach(e => {
           let sorted = this.props.notes.filter(note => note._id === e.dataset.id);
           arrSorted.push(sorted[0]);
         })
-        
         this.props.dragSort(arrSorted);
         
       })
 
-    }, 500);
+    }, 400);
   }
 
   componentDidUpdate() {
+    // Adjust the layout when items are deleted from the list view.
     if(this.grid) {
       this.grid.getMethod('refreshItems');
       this.grid.getMethod('layout');

@@ -33,14 +33,13 @@ export const MainHeader = styled.div `
     }
   }
 
-  
-
   div {
     position: absolute;
     right: 5%;
     width: 15%;
     background-color: #24B8BD;
     color: white;
+    font-weight: bold;  
     text-align: center;
     border: 1px solid black;
     margin-bottom: 5px;
@@ -94,14 +93,16 @@ export const CardContainer = styled.div `
   height: 100%;
   background-color: #fff;
   position: relative:
-  transition: all .6s;
-  transition: all .6s linear;  
+  transition: all .4s;
+  transition: all .4s linear;  
   transform-style: preserve-3d;
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.25);
+
 
   &.found {
     background-color: #24B8BD;
-    transform: scale(1.05);
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.25);
+    transform: scale(1.03);
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.25);
 
     h3, .text-body {
       color: white;
@@ -109,47 +110,12 @@ export const CardContainer = styled.div `
   }
 
   &.not-found {
-    // opacity: 0.4;
+    box-shadow: 0px 0px 0px rgb(0,0,0);
   }
 
   &.delete {
     transform: rotateY(180deg);
   }
-
-  // .card-front, .card-back {
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 100%;
-  //   backface-visibility: hidden;
-  //   padding: 5px;
-  //   box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
-  // }
-
-  // .card-front {
-
-  //   .card-header {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     border-bottom: 1px solid black;
-
-  //     h3 {
-  //       padding-bottom: 3px;
-  //       overflow: hidden;
-  //       white-space: nowrap;
-  //       text-overflow: ellipsis;  
-  //     }
-
-  //     button {
-  //       width: 26px;
-  //       height: 26px;
-  //       background-color: #24B8BD;
-  //       color: white;
-  //       font-weight: bold;
-  //       border: none;
-  //       margin-bottom: 5px;
-  //     }
-  //   }
-  // }
   
   h3, .text-body {
     color: black;
@@ -162,30 +128,6 @@ export const CardContainer = styled.div `
     overflow: hidden;
     height: 160px;
   }
-
-  // .card-back {
-  //   width: 100%;
-  //   transform: rotateY(180deg);
-  //   background-color: #CA001A;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-around;
-  //   align-items: center;
-
-  //   h3 {
-  //     color: white;
-  //     font-weight: bold;
-  //   }
-
-  //   button {
-  //     width: 40%;
-  //     height: 32px;
-  //     background-color: #24B8BD;
-  //     font-weight: bold;
-  //     color: white;
-  //     border: none;
-  //   }
-  // }
 `
 
 export const CardFront = styled.div `
@@ -194,7 +136,6 @@ export const CardFront = styled.div `
   height: 100%;
   backface-visibility: hidden;
   padding: 5px;
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
 }
 
   .card-header {
@@ -227,7 +168,6 @@ export const CardBack = styled.div `
   height: 100%;
   backface-visibility: hidden;
   padding: 5px;
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.25);
   width: 100%;
   transform: rotateY(180deg);
   background-color: #CA001A;

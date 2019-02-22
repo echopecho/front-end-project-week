@@ -22,7 +22,7 @@ export class NoteForm extends Component {
           this.setState({
             title: response.data.title,
             textBody: response.data.textBody
-          })
+          });
         })
         .catch(err => {
           console.log(err);
@@ -30,7 +30,6 @@ export class NoteForm extends Component {
     }
   }
   
-
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -44,7 +43,6 @@ export class NoteForm extends Component {
       this.props.addNote(this.state, this.props.notes);
       this.props.history.push('/');
     }
-    // this.props.history.push('/');
   }
   
   render() {

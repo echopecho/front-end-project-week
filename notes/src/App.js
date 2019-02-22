@@ -8,7 +8,7 @@ import { fetchNotes } from './components/actions';
 
 import { withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
-import { AppContainer } from './components/style';
+import { AppContainer } from './components/note-list-style';
 // import styled from 'styled-components';
 import { connect } from 'react-redux';
 

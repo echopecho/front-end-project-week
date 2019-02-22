@@ -1,46 +1,10 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
-import styled from 'styled-components';
+import { FormContainer } from './note-style';
 import { connect } from 'react-redux';
 import { addNote, updateNote } from './actions';
 
-const FormContainer = styled.div `
-  width: 75%;
-  background-color: #F2F1F2;
-  margin-left: 25%;
-  height: 100vh;
-  padding: 20px;
-
-  form {
-    display: flex;
-    flex-direction: column;
-
-    input {
-      width: 55%;
-      height: 28px;
-      margin-bottom: 20px;
-      padding: 0 7px;
-    }
-
-    textarea {
-      height: 300px;
-      margin-bottom: 20px;
-      padding: 15px;
-    }
-
-    button {
-      width: 30%;
-      height: 36px;
-      margin-bottom: 20px;
-      background-color: #24B8BD;
-      font-weight: bold;
-      color: #ffffff;
-      border: none;
-      cursor: pointer;
-    }
-  }
-`
 
 export class NoteForm extends Component {
   constructor(props) {
@@ -75,12 +39,12 @@ export class NoteForm extends Component {
     e.preventDefault();
     if(this.props.update) {
       this.props.updateNote(this.state, this.props.match.params.id, this.props.notes);
-      // this.props.history.push(`/notes/${this.props.match.params.id}`);
+      this.props.history.push(`/notes/${this.props.match.params.id}`);
     } else {
       this.props.addNote(this.state, this.props.notes);
-      // this.props.history.push('/');
+      this.props.history.push('/');
     }
-    this.props.history.push('/');
+    // this.props.history.push('/');
   }
   
   render() {

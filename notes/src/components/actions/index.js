@@ -7,6 +7,7 @@ export const DRAGGED = 'DRAGGED';
 export const QUERY = 'QUERY';
 export const CLEAR = 'CLEAR';
 export const ADD_DELETE = 'ADD_DELETE';
+export const FAILURE = 'FAILURE';
 
 export const toggleLoading = () => {
   return { type: LOADING }
@@ -20,8 +21,8 @@ export const fetchNotes = () => dispatch => {
       .then(response => {
         dispatch({ type: SUCCESS, payload: response.data });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        dispatch({ type: FAILURE, error: "Something went wrong" })
       })
 }
 
@@ -38,8 +39,8 @@ export const addNote = (newNote, oldNotes) => dispatch => {
           dispatch({ type: SUCCESS, payload: newState });
         })
     })
-    .catch(err => {
-      console.log(err);
+    .catch(() => {
+      dispatch({ type: FAILURE, error: "Something went wrong" })
     })
 }
 

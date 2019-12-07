@@ -1,4 +1,4 @@
-import { LOADING, SUCCESS, SELECT, DRAGGED, QUERY, CLEAR, ADD_DELETE } from '../actions';
+import { LOADING, SUCCESS, SELECT, DRAGGED, QUERY, CLEAR, ADD_DELETE, FAILURE } from '../actions';
 
 const initialState = {
   notes: [],
@@ -6,7 +6,8 @@ const initialState = {
   selectedID: '',
   foundItems: [],
   deleteList: [],
-  activeSearch: false
+  activeSearch: false,
+  error: null
 }
 
 export default (state = initialState, action) => {
@@ -25,6 +26,8 @@ export default (state = initialState, action) => {
       return { ...state, foundItems: [], activeSearch: false }
     case ADD_DELETE:
       return { ...state, deleteList: action.payload }
+    case FAILURE:
+      return { ...state, error: action.error }
     default:
       return state;
   }

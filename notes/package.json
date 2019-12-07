@@ -5,10 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "hammerjs": "^2.0.8",
+    "marked": "^0.6.1",
     "muuri": "^0.7.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-markdown": "^4.0.6",
+    "react-marked-markdown": "^1.4.6",
     "react-muuri": "^0.2.0",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",

@@ -90,6 +90,7 @@ class NoteList extends React.Component {
           }
         </MainHeader>        
         <ListContainer ref={gridElement => this.gridElement = gridElement}>
+          {this.props.error ? <p>{this.props.error}</p> : null}
           {this.props.notes.map(note => (
             <div className="item" key={note._id} data-id={note._id}>
               <div className="item-content">
@@ -107,7 +108,8 @@ const mapStateToProps = state => {
   return {
     notes: state.notes,
     loading: state.fetching,
-    activeSearch: state.activeSearch
+    activeSearch: state.activeSearch,
+    error: state.error
   }
 }
 
